@@ -7,22 +7,24 @@ td {
     padding: 5px 10px;
 }
 
-.selected {
-    background-color: goldenrod;
+.round {
+    color: #999;
+    font-size: 13px;
 }
+
 
 .signsbtn {
     width: 30px; height: 30px;
     border: 0;
     margin: 5px 0;
-
+    
     background-color: #CCC;
     cursor: pointer;
-
+    
     font-size: 16px;
     font-weight: bold;
 }
 
-.checked {
+.selected, .checked {
     background-color: goldenrod;
 }
