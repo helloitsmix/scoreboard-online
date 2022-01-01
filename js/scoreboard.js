@@ -124,10 +124,10 @@ $("input[name='signs']").on("click", function(e) {
 })
 
 $("#players").on("click", function(e) {
-
+    
     let players = prompt("Nomi dei giocatori:");
     
-    if (players !== null || players !== "") {
+    if (players !== null && players !== "") {
         scoreboard.clear();
         scoreboard.data.players = players.split(',');
         scoreboard.reload();
