@@ -8,9 +8,9 @@ scoreboard = {
 
     selected: {
         position: "",
-        value: 0,
+        // value: 0,
 
-        prevPosition: "",
+        // prevPosition: "",
         prevValue: 0
     },
 
@@ -24,10 +24,12 @@ scoreboard = {
     },
 
     clear: function () {
-        this.selected.position = "";
-        this.selected.value = 0;
+        this.selected = {
+            position: "",
+            prevValue: 0
+        }
         this.data.scores = [[]];
-        $("#table tbody").empty();
+        $("#table thead, #table tbody").empty();
     },
 
     reload: function (next) {
@@ -112,13 +114,25 @@ $("#table tbody").on("click", ".data", function(e) {
 
 });
 
-$(".signsbtn").on("click", function(e) {
+$("input[name='signs']").on("click", function(e) {
     if ($(this).hasClass("checked"))
         $(this).removeClass("checked");
     else {
         $(".signsbtn").removeClass("checked");
         $(this).addClass("checked");
     }
+})
+
+$("#players").on("click", function(e) {
+
+    let players = prompt("Nomi dei giocatori:");
+    
+    if (players !== null || players !== "") {
+        scoreboard.clear();
+        scoreboard.data.players = players.split(',');
+        scoreboard.reload();
+    }
+
 })
 
 $("#addscore").on("keydown", function (e) {
