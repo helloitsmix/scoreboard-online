@@ -21,17 +21,53 @@ body {
 }
 
 #screen1 {
-    background-color: yellowgreen;
+    /* background-color: yellowgreen; */
     z-index: 300;
 }
 
+#screen1 .btn-menu-container {
+    display: flex;
+    flex-direction: column;
+
+    margin: 0 1rem;
+}
+
+#screen1 .btn-menu-container .last-game {
+    margin: 0 4px;
+    color: #AAAAAA;
+    
+    font-size: 0.75rem;
+    font-weight: 500; /* medium */
+
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+#screen1 .btn-menu-container .btn-menu {
+    padding: 1rem; margin-bottom: 1rem;
+
+    box-sizing: border-box;
+    border: 4px solid #AAAAAA;
+    border-radius: 0.5rem;
+
+    color: #313131;
+    background-color: #FFFFFF;
+
+    font-weight: 800;
+    font-size: 1.8rem;
+    text-transform: uppercase;
+}
+
+#screen1 #btn-newgame {
+    background-color: #DDDDDD;
+}
+
 #screen2 {
-    background-color: plum;
+    /* background-color: plum; */
     z-index: 200;
 }
 
 #screen3 {
-    background-color: peru;
+    /* background-color: peru; */
     z-index: 100;
 }
 

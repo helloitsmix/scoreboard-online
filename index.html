@@ -15,18 +15,26 @@
         <div class="navbar">
             <span>Scoreboard Online</span>
         </div>
-    </div>
-    
-    <div id="screen2" class="screen">
-        <div class="navbar">
-            <i class="fa-solid fa-arrow-left fa-xl"></i>
-            <span>Players</span>
-            <i class="fa-solid fa-check fa-xl" style="margin-left: auto;"></i>
+        <div style="flex: 1"></div>
+        <div class="btn-menu-container">
+            <span class="last-game">Last game on 28/01/2022: Lorenzo, Alex, Lucia, Matteo, Francesca, Elia, Luca</span>
+            <button type="button" class="btn-menu navigate" data-navigate="N,2" id="btn-continue">CONTINUE</button>
+            <button type="button" class="btn-menu navigate" data-navigate="N,1" id="btn-newgame">NEW GAME</button>
         </div>
     </div>
     
-    <div id="screen3" class="screen">
-        <div class="navbar"></div>
+    <div id="screen2" class="screen" style="display: none">
+        <div class="navbar">
+            <a class="navigate" data-navigate="B,1"><i class="fa-solid fa-arrow-left fa-xl"></i></a>
+            <span>Players</span>
+            <a class="navigate" data-navigate="N,1" style="margin-left: auto;"><i class="fa-solid fa-check fa-xl"></i></a>
+        </div>
+    </div>
+    
+    <div id="screen3" class="screen" style="display: none">
+        <div class="navbar">
+            <a class="navigate" data-navigate="B,2"><i class="fa-solid fa-arrow-left fa-xl"></i></a>
+        </div>
         <table id="table">
             <thead>
 

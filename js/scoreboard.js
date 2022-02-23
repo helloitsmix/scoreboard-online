@@ -1,12 +1,42 @@
 navigation = {
 
     currentPage: 1,
+    lastPage: 1,
 
-    next: () => {
-
+    next: function (page = 1) {
+        this.lastPage = this.currentPage;
+        this.currentPage = this.currentPage + page;
+        this.reload();
+    },
+    
+    back: function (page = 1) {
+        this.lastPage = this.currentPage;
+        this.currentPage = this.currentPage - page;
+        this.reload();
     },
 
-    back: () => {
+    reload: function () {
+
+        console.log(this.lastPage, this.currentPage);
+
+        switch(this.currentPage) {
+            case 1:
+                $("#screen2").fadeOut(250, () => $("#screen3").fadeOut(250, () => $("#screen1").fadeIn(250)));
+                break;
+
+            case 2:
+                $("#screen1").fadeOut(250, () => $("#screen3").fadeOut(250, () => $("#screen2").fadeIn(250)));
+                break;
+
+            case 3:
+                $("#screen1").fadeOut(250, () => $("#screen2").fadeOut(250, () => $("#screen3").fadeIn(250)));
+                break;
+
+            default:
+                this.currentPage = 1;
+                this.reload();
+                break;
+        }
 
     }
 
@@ -29,12 +59,11 @@ scoreboard = {
     },
 
     save: function () {
-        // let data = JSON.stringify(sb)
-        // JSON.parse(data)
+        localStorage.setItem('data', JSON.stringify(this.data));
     },
-
+    
     load: function () {
-
+        this.data = JSON.parse(localStorage.getItem('data'));
     },
 
     clear: function () {
@@ -58,7 +87,6 @@ scoreboard = {
             $("#table thead").append(players + "</tr>");
         }
 
-
         for (let i = 0; i < this.data.scores.length; i++) { // se scores: [[0,1], [2,3]] ENTRA length = 2
 
             const rowexists = $(".row"+i).length === 1
@@ -68,27 +96,25 @@ scoreboard = {
 
             for (let j = 0; j < this.data.players.length; j++) {  // se scores: [[0,1], [2,3]] length = 2 x 2
 
-                if (rowexists) {
+                if (rowexists)
                     $("td[data-position='" + i + "," + j + "']").text(this.data.scores[i][j])
-                } else {
+                else
                     $(".row"+i).append("<td class='col"+j+" data' data-position='"+i+","+j+"'>" + (this.data.scores[i][j] || "") + "</td>")
-                }
                 
             }
 
         }
 
-        // if (this.selected.position !== "") {
-        // }
-            
         if (next)
             this.nextSelected()
 
         $("#table tbody td").removeClass("selected")
         $("td[data-position='" + this.selected.position + "']").addClass("selected")
+
     },
 
     nextSelected: function () {
+
         let x = parseInt(this.selected.position.split(',')[0]);
         let y = parseInt(this.selected.position.split(',')[1]);
         
@@ -110,6 +136,16 @@ scoreboard = {
 
 }
 
+$(".navigate").click((e) => {
+    let choice = $(e.currentTarget).data().navigate.split(",")[0];
+    let pages = parseInt($(e.currentTarget).data().navigate.split(",")[1]);
+    
+    if (choice === "N")
+        navigation.next(pages);
+    else
+        navigation.back(pages);
+})
+
 scoreboard.reload()
 
 $("#table tbody").on("click", ".data", function(e) {
@@ -119,22 +155,24 @@ $("#table tbody").on("click", ".data", function(e) {
     
     scoreboard.selected = {
         position,
-        value: parseInt($(this).text()) || 0,
-        prevPosition,
+        // value: parseInt($(this).text()) || 0,
+        // prevPosition,
         prevValue: parseInt($("td[data-position='" + prevPosition + "']").text()) || 0
     }
-        
+
     scoreboard.reload()
 
 });
 
 $("input[name='signs']").on("click", function(e) {
+
     if ($(this).hasClass("checked"))
         $(this).removeClass("checked");
     else {
         $(".signsbtn").removeClass("checked");
         $(this).addClass("checked");
     }
+
 })
 
 $("#players").on("click", function(e) {
@@ -143,7 +181,7 @@ $("#players").on("click", function(e) {
     
     if (players !== null && players !== "") {
         scoreboard.clear();
-        scoreboard.data.players = players.split(',');
+        scoreboard.data.players = $.map(players.split(','), $.trim);
         scoreboard.reload();
     }
 
