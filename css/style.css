@@ -1,5 +1,55 @@
 * {
-    font-family: "roboto";
+    font-family: 'Roboto', sans-serif;
+}
+
+html {
+    font-size: 16px;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.screen {
+    height: 100vh; width: 100vw;
+    
+    position: absolute;
+
+    display: flex;
+    flex-direction: column;
+}
+
+#screen1 {
+    background-color: yellowgreen;
+    z-index: 300;
+}
+
+#screen2 {
+    background-color: plum;
+    z-index: 200;
+}
+
+#screen3 {
+    background-color: peru;
+    z-index: 100;
+}
+
+.navbar {
+    background-color: #313131;
+    color: white;
+    
+    height: 3.75rem;
+    padding: 0 1rem;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+.navbar span {
+    font-size: 1.8rem;
+    font-weight: 800;
+    padding: 0 1rem;
 }
 
 td {
@@ -12,7 +62,6 @@ td {
     font-size: 13px;
 }
 
-
 .signsbtn {
     width: 30px; height: 30px;
     border: 0;
@@ -22,7 +71,7 @@ td {
     cursor: pointer;
     
     font-size: 16px;
-    font-weight: bold;
+    font-weight: 800;
 }
 
 .selected, .checked {

@@ -5,14 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Scoreboard</title>
+    <script src="https://kit.fontawesome.com/0d6a5c3360.js" crossorigin="anonymous"></script>
 	<!-- <link rel="manifest" href="manifest.json" crossorigin="use-credentials"> -->
 	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-    <div id="homepage"></div>
+    <div id="screen1" class="screen">
+        <div class="navbar">
+            <span>Scoreboard Online</span>
+        </div>
+    </div>
     
-    <div id="scoreboard">
+    <div id="screen2" class="screen">
+        <div class="navbar">
+            <i class="fa-solid fa-arrow-left fa-xl"></i>
+            <span>Players</span>
+            <i class="fa-solid fa-check fa-xl" style="margin-left: auto;"></i>
+        </div>
+    </div>
+    
+    <div id="screen3" class="screen">
+        <div class="navbar"></div>
         <table id="table">
             <thead>
 
@@ -31,8 +45,11 @@
         </div>
     </div>
 
+
+
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-	<script src="js/scoreboard.js"></script>
+	<!-- <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js" integrity="sha256-eTyxS0rkjpLEo16uXTS0uVCS4815lc40K2iVpWDvdSY=" crossorigin="anonymous"></script> -->
+    <script src="js/scoreboard.js"></script>
 
 </body>
 </html>

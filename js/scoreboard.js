@@ -1,3 +1,17 @@
+navigation = {
+
+    currentPage: 1,
+
+    next: () => {
+
+    },
+
+    back: () => {
+
+    }
+
+}
+
 scoreboard = {
 
     data: {
