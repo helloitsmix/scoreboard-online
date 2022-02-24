@@ -66,6 +66,33 @@ body {
     z-index: 200;
 }
 
+#screen2 #insert-players {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    margin: 1rem 1rem 0 1rem;
+}
+
+#screen2 .insert-player-name {
+    flex: 1;
+    padding-left: 1rem;
+
+    background-color: #FFFFFF;
+    border: 2px solid #AAAAAA;
+    border-radius: 0.5rem;
+
+    font-size: 1.35rem;
+    font-weight: 500;
+}
+
+#screen2 .remove-player {
+    padding: 0.8rem;
+    background-color: #DDDDDD;
+    border-radius: 0.5rem;
+    margin-left: 1rem;
+}
+
 #screen3 {
     /* background-color: peru; */
     z-index: 100;

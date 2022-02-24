@@ -18,13 +18,22 @@ navigation = {
     reload: function () {
 
         console.log(this.lastPage, this.currentPage);
+        // if (this.lastPage === 1 && this.currentPage === 1)
 
         switch(this.currentPage) {
             case 1:
+                let data = scoreboard.load();
+                if (data !== null) {
+                    $(".last-game").text("Last game on " + data.lastDate + ": " + data.players.join())
+                    $(".continue").show();
+                }
+
                 $("#screen2").fadeOut(250, () => $("#screen3").fadeOut(250, () => $("#screen1").fadeIn(250)));
                 break;
 
             case 2:
+                $("#insert-players").empty().append("<input type='text' minlength='1' maxlength='10' class='insert-player-name'><div class='remove-player'><i class='fa-solid fa-trash-can fa-lg'></i></div>")
+
                 $("#screen1").fadeOut(250, () => $("#screen3").fadeOut(250, () => $("#screen2").fadeIn(250)));
                 break;
 
@@ -33,7 +42,7 @@ navigation = {
                 break;
 
             default:
-                this.currentPage = 1;
+                this.currentPage = 1; this.lastPage = 1;
                 this.reload();
                 break;
         }
@@ -45,9 +54,9 @@ navigation = {
 scoreboard = {
 
     data: {
-        players: ["luca", "paolo", "marco"],
-        scores: [[]]
-        // scores: [[2,5,6], [3,8,10], [12,20,18]]
+        players: ["l","s"],
+        scores: [[]],
+        lastDate: null
     },
 
     selected: {
@@ -63,7 +72,8 @@ scoreboard = {
     },
     
     load: function () {
-        this.data = JSON.parse(localStorage.getItem('data'));
+        // this.data = 
+        return JSON.parse(localStorage.getItem('data'));
     },
 
     clear: function () {
@@ -146,6 +156,13 @@ $(".navigate").click((e) => {
         navigation.back(pages);
 })
 
+$("#insert-players").on("keydown", function (e) {
+    
+    if (e.keyCode === 13 || e.keyCode === 9) {
+    }
+
+});
+
 scoreboard.reload()
 
 $("#table tbody").on("click", ".data", function(e) {
@@ -175,17 +192,17 @@ $("input[name='signs']").on("click", function(e) {
 
 })
 
-$("#players").on("click", function(e) {
+// $("#players").on("click", function(e) {
     
-    let players = prompt("Nomi dei giocatori:");
+//     let players = prompt("Nomi dei giocatori:");
     
-    if (players !== null && players !== "") {
-        scoreboard.clear();
-        scoreboard.data.players = $.map(players.split(','), $.trim);
-        scoreboard.reload();
-    }
+//     if (players !== null && players !== "") {
+//         scoreboard.clear();
+//         scoreboard.data.players = $.map(players.split(','), $.trim);
+//         scoreboard.reload();
+//     }
 
-})
+// })
 
 $("#addscore").on("keydown", function (e) {
     
@@ -209,3 +226,5 @@ $("#addscore").on("keydown", function (e) {
     }
 
 });
+
+navigation.reload();

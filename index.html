@@ -17,8 +17,8 @@
         </div>
         <div style="flex: 1"></div>
         <div class="btn-menu-container">
-            <span class="last-game">Last game on 28/01/2022: Lorenzo, Alex, Lucia, Matteo, Francesca, Elia, Luca</span>
-            <button type="button" class="btn-menu navigate" data-navigate="N,2" id="btn-continue">CONTINUE</button>
+            <span class="last-game continue" style="display: none;"></span>
+            <button type="button" class="btn-menu navigate continue" data-navigate="N,2" id="btn-continue" style="display: none;">CONTINUE</button>
             <button type="button" class="btn-menu navigate" data-navigate="N,1" id="btn-newgame">NEW GAME</button>
         </div>
     </div>
@@ -29,6 +29,14 @@
             <span>Players</span>
             <a class="navigate" data-navigate="N,1" style="margin-left: auto;"><i class="fa-solid fa-check fa-xl"></i></a>
         </div>
+        <!-- -- -->
+        <div id="insert-players">
+            <!-- <input type="text" minlength="1" maxlength="10" class="insert-player-name">
+            <div class="remove-player">
+                <i class="fa-solid fa-trash-can fa-lg"></i>
+            </div> -->
+        </div>
+        <!-- -- -->
     </div>
     
     <div id="screen3" class="screen" style="display: none">
@@ -49,7 +57,6 @@
         <div id="signs">
             <input type="button" class="signsbtn" name="signs" value="+" id="plus" />
             <input type="button" class="signsbtn" name="signs" value="-" id="minus" />
-            <input type="button" class="signsbtn" name="players" value="P" id="players" />
         </div>
     </div>
 
