@@ -1,4 +1,9 @@
 {
+    "screen0": {
+        "alertno": "No",
+        "alertyes": "Si"
+    },
+
     "screen1": {
         "title": "Segnapunti Online",
         "continue": "CONTINUA",

@@ -12,7 +12,13 @@
 <body>
 
     <div id="screen0" class="screen" style="display: none">
-
+        <div class="restart-alert">
+            <span>Sei sicuro di voler ricominciare?</span>
+            <div class="buttons">
+                <button type="button" class="pressable" id="restart-no" data-i18n="screen0.alertno">No</button>
+                <button type="button" class="pressable" id="restart-yes" data-i18n="screen0.alertyes">Yes</button>
+            </div>
+        </div>
     </div>
 
     <div id="screen1" class="screen">
@@ -22,16 +28,16 @@
         <div style="flex: 1"></div>
         <div class="btn-menu-container">
             <span class="last-game continue" style="display: none;"></span>
-            <button type="button" class="btn-menu navigate continue" data-navigate="N,2" id="btn-continue" style="display: none;" data-i18n="screen1.continue">CONTINUE</button>
-            <button type="button" class="btn-menu navigate" data-navigate="N,1" id="btn-newgame" data-i18n="screen1.newgame">NEW GAME</button>
+            <button type="button" class="pressable btn-menu navigate continue" data-navigate="N,2" id="btn-continue" style="display: none;" data-i18n="screen1.continue">CONTINUE</button>
+            <button type="button" class="pressable btn-menu navigate" data-navigate="N,1" id="btn-newgame" data-i18n="screen1.newgame">NEW GAME</button>
         </div>
     </div>
     
     <div id="screen2" class="screen" style="display: none">
         <div class="navbar">
-            <a class="navigate" data-navigate="B,1"><i class="fa-solid fa-arrow-left fa-xl"></i></a>
+            <a class="navigate pressable" data-navigate="B,1"><i class="fa-solid fa-arrow-left fa-xl"></i></a>
             <span data-i18n="screen2.players">Players</span>
-            <a class="navigate" data-navigate="N,1" style="margin-left: auto;"><i class="fa-solid fa-check fa-xl"></i></a>
+            <a class="navigate pressable" data-navigate="N,1" style="margin-left: auto;"><i class="fa-solid fa-check fa-xl"></i></a>
         </div>
 
         <div id="insert-player-container"></div>
@@ -39,24 +45,25 @@
     </div>
     
     <div id="screen3" class="screen" style="display: none">
+
         <div class="navbar">
-            <a class="navigate" data-navigate="B,2"><i class="fa-solid fa-arrow-left fa-xl"></i></a>
-            <a id="restart"><i class="fa-solid fa-arrow-rotate-right fa-xl"></i></a>
+            <a class="navigate pressable" data-navigate="B,2"><i class="fa-solid fa-arrow-left fa-xl"></i></a>
+            <a id="restart" class="pressable"><i class="fa-solid fa-arrow-rotate-right fa-xl"></i></a>
         </div>
-        <table id="table">
-            <thead>
 
-            </thead>
-            <tbody>
-                
-            </tbody>
-        </table>
+        <div id="table-container">
+            <table id="table">
+                <thead></thead>
+                <tbody></tbody>
+            </table>
+        </div>
 
-        <input type="number" id="addscore">
+        <div id="addscore-container">
+            <div id="signs">
+                <button type="button" class="signsbtn pressable checked" name="signs" id="plus"><i class="fa-solid fa-plus fa-xl"></i></button><button type="button" class="signsbtn pressable" name="signs" id="minus"><i class="fa-solid fa-minus fa-xl"></i></button>
+            </div>
 
-        <div id="signs">
-            <input type="button" class="signsbtn" name="signs" value="+" id="plus" />
-            <input type="button" class="signsbtn" name="signs" value="-" id="minus" />
+            <input type="number" id="addscore">
         </div>
     </div>
 

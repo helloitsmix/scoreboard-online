@@ -1,4 +1,9 @@
 {
+    "screen0": {
+        "alertno": "No",
+        "alertyes": "Yes"
+    },
+
     "screen1": {
         "title": "Scoreboard Online",
         "continue": "CONTINUE",

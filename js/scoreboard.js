@@ -1,4 +1,4 @@
-const LANG = navigator.languages ? navigator.languages[0].substring(0, 2) : navigator.language.substring(0, 2);
+const LANG = navigator.languages ? navigator.languages[0].substring(0, 2) : navigator.language.substring(0, 2)
 
 navigation = {
 
@@ -19,7 +19,7 @@ navigation = {
 
     reload: function () {
 
-        console.log(this.lastPage, this.currentPage)
+        // console.log(this.lastPage, this.currentPage)
 
         switch(this.currentPage) {
             case 1:
@@ -36,22 +36,20 @@ navigation = {
                 break;
 
             case 2:
-                $("#insert-player-container").empty().append("<div class='insert-player'><input type='text' minlength='1' maxlength='10' class='insert-player-name'><div class='remove-player'><i class='fa-solid fa-trash-can fa-lg'></i></div></div>")
+                $("#insert-player-container").empty().append("<div class='insert-player'><input type='text' minlength='1' maxlength='10' class='insert-player-name'><div class='remove-player pressable'><i class='fa-solid fa-trash-can fa-lg'></i></div></div>")
 
                 $("#screen1").fadeOut(250, () => $("#screen3").fadeOut(250, () => $("#screen2").fadeIn(250)))
                 break;
 
             case 3:
-                if (this.lastPage === 1) {
+                if (this.lastPage === 1) { // CONTINUE
                     scoreboard.data = scoreboard.load()
-                } else if (this.lastPage === 2) {
+                } else if (this.lastPage === 2) { // NEW GAME
                     let players = $(".insert-player-name").map((_, name) => $(name).val().trim()).toArray().filter(n => n)
-
-                    // if (players.length === 0)
-                    //     return
 
                     scoreboard.clear()
                     scoreboard.data.players = players
+                    // $("#table tr td.data").first().addClass("selected")
                 }
                 
                 if (LANG === "it")
@@ -61,6 +59,8 @@ navigation = {
 
                 scoreboard.save()
                 scoreboard.reload()
+
+                // $("#table tr td:empty").first().addClass("selected")
 
                 $("#screen1").fadeOut(250, () => $("#screen2").fadeOut(250, () => $("#screen3").fadeIn(250)))
                 break;
@@ -179,7 +179,7 @@ $(".navigate").click((e) => {
 $("#insert-player-container").on("keydown", ".insert-player-name", (e) => {
     
     if (e.keyCode === 13 || e.keyCode === 9) {
-        $("#insert-player-container").append("<div class='insert-player'><input type='text' minlength='1' maxlength='10' class='insert-player-name'><div class='remove-player'><i class='fa-solid fa-trash-can fa-lg'></i></div></div>")
+        $("#insert-player-container").append("<div class='insert-player'><input type='text' minlength='1' maxlength='10' class='insert-player-name'><div class='remove-player pressable'><i class='fa-solid fa-trash-can fa-lg'></i></div></div>")
         setTimeout( function() {
             $("#insert-player-container .insert-player-name").last().focus()
         })
@@ -189,17 +189,29 @@ $("#insert-player-container").on("keydown", ".insert-player-name", (e) => {
 
 $("#insert-player-container").on("click", ".remove-player", (e) => {
     if ($(".remove-player").length > 1)
-        $(e.currentTarget).parent().remove();
+        $(e.currentTarget).parent().remove()
 })
 
-$("#restart").click(() => {
+$("#restart").click((e) => {
+    e.stopPropagation()
+    $("#screen0").fadeIn(250)
+})
+
+$("#restart-yes").click((e) => {
+    e.stopPropagation()
     scoreboard.clear()
     scoreboard.save()
     scoreboard.reload()
+    $("#screen0").fadeOut(250)
 })
 
-$("#table tbody").on("click", ".data", function(e) {
+$("#screen0, #restart-no").click((e) => {
+    e.stopPropagation()
+    $("#screen0").fadeOut(250)
+})
 
+$("#table tbody").on("click", ".data", function() {
+console.log('click')
     let position = $(this).data().position
     let prevPosition = (parseInt(position.split(",")[0]) - 1) + "," + position.split(",")[1]
     
@@ -214,7 +226,7 @@ $("#table tbody").on("click", ".data", function(e) {
 
 })
 
-$("input[name='signs']").on("click", function(e) {
+$("button[name='signs']").on("click", function(e) {
 
     if ($(this).hasClass("checked"))
         $(this).removeClass("checked")
