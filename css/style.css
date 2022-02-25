@@ -20,6 +20,13 @@ body {
     flex-direction: column;
 }
 
+#screen0 {
+    background-color: #FFFFFF80;
+    z-index: 400;
+    /* opacity: 0.5;
+    padding: 1rem; */
+}
+
 #screen1 {
     /* background-color: yellowgreen; */
     z-index: 300;
@@ -33,7 +40,7 @@ body {
 }
 
 #screen1 .btn-menu-container .last-game {
-    margin: 0 4px;
+    margin: 0 4px 2px 4px;
     color: #AAAAAA;
     
     font-size: 0.75rem;
@@ -66,12 +73,19 @@ body {
     z-index: 200;
 }
 
-#screen2 #insert-players {
+#screen2 #insert-player-container {
+    display: flex;
+    flex-direction: column;
+
+    margin-left: 1rem;
+    padding-right: 1rem;
+    overflow: auto;
+}
+
+#screen2 .insert-player {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-
-    margin: 1rem 1rem 0 1rem;
+    margin-top: 1rem;
 }
 
 #screen2 .insert-player-name {
@@ -107,6 +121,7 @@ body {
     display: flex;
     align-items: center;
     flex-direction: row;
+    justify-content: space-between;
 }
 
 .navbar span {
@@ -121,7 +136,7 @@ td {
 }
 
 .round {
-    color: #999;
+    color: #999999;
     font-size: 13px;
 }
 
@@ -130,7 +145,7 @@ td {
     border: 0;
     margin: 5px 0;
     
-    background-color: #CCC;
+    background-color: #CCCCCC;
     cursor: pointer;
     
     font-size: 16px;

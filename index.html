@@ -11,37 +11,37 @@
 </head>
 <body>
 
+    <div id="screen0" class="screen" style="display: none">
+
+    </div>
+
     <div id="screen1" class="screen">
         <div class="navbar">
-            <span>Scoreboard Online</span>
+            <span data-i18n="screen1.title">Scoreboard Online</span>
         </div>
         <div style="flex: 1"></div>
         <div class="btn-menu-container">
             <span class="last-game continue" style="display: none;"></span>
-            <button type="button" class="btn-menu navigate continue" data-navigate="N,2" id="btn-continue" style="display: none;">CONTINUE</button>
-            <button type="button" class="btn-menu navigate" data-navigate="N,1" id="btn-newgame">NEW GAME</button>
+            <button type="button" class="btn-menu navigate continue" data-navigate="N,2" id="btn-continue" style="display: none;" data-i18n="screen1.continue">CONTINUE</button>
+            <button type="button" class="btn-menu navigate" data-navigate="N,1" id="btn-newgame" data-i18n="screen1.newgame">NEW GAME</button>
         </div>
     </div>
     
     <div id="screen2" class="screen" style="display: none">
         <div class="navbar">
             <a class="navigate" data-navigate="B,1"><i class="fa-solid fa-arrow-left fa-xl"></i></a>
-            <span>Players</span>
+            <span data-i18n="screen2.players">Players</span>
             <a class="navigate" data-navigate="N,1" style="margin-left: auto;"><i class="fa-solid fa-check fa-xl"></i></a>
         </div>
-        <!-- -- -->
-        <div id="insert-players">
-            <!-- <input type="text" minlength="1" maxlength="10" class="insert-player-name">
-            <div class="remove-player">
-                <i class="fa-solid fa-trash-can fa-lg"></i>
-            </div> -->
-        </div>
-        <!-- -- -->
+
+        <div id="insert-player-container"></div>
+
     </div>
     
     <div id="screen3" class="screen" style="display: none">
         <div class="navbar">
             <a class="navigate" data-navigate="B,2"><i class="fa-solid fa-arrow-left fa-xl"></i></a>
+            <a id="restart"><i class="fa-solid fa-arrow-rotate-right fa-xl"></i></a>
         </div>
         <table id="table">
             <thead>
@@ -63,7 +63,8 @@
 
 
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-	<!-- <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js" integrity="sha256-eTyxS0rkjpLEo16uXTS0uVCS4815lc40K2iVpWDvdSY=" crossorigin="anonymous"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js" integrity="sha512-LGXaggshOkD/at6PFNcp2V2unf9LzFq6LE+sChH7ceMTDP0g2kn6Vxwgg7wkPP7AAtX+lmPqPdxB47A0Nz0cMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="js/translator.js" type="module"></script>
     <script src="js/scoreboard.js"></script>
 
 </body>

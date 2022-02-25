@@ -1,0 +1,11 @@
+{
+    "screen1": {
+        "title": "Scoreboard Online",
+        "continue": "CONTINUE",
+        "newgame": "NEW GAME"
+    },
+
+    "screen2": {
+        "players": "Players"
+    }
+}

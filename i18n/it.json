@@ -1,0 +1,11 @@
+{
+    "screen1": {
+        "title": "Segnapunti Online",
+        "continue": "CONTINUA",
+        "newgame": "NUOVO GIOCO"
+    },
+
+    "screen2": {
+        "players": "Giocatori"
+    }
+}
