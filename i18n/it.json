@@ -1,5 +1,6 @@
 {
     "screen0": {
+        "message": "Sei sicuro di voler ricominciare?",
         "alertno": "No",
         "alertyes": "Si"
     },

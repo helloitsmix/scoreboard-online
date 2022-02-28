@@ -1,5 +1,6 @@
 {
     "screen0": {
+        "message": "Are you sure you want to restart?",
         "alertno": "No",
         "alertyes": "Yes"
     },
