@@ -19,8 +19,6 @@ navigation = {
 
     reload: function () {
 
-        // console.log(this.lastPage, this.currentPage)
-
         switch(this.currentPage) {
             case 1:
                 let data = scoreboard.load()
@@ -38,7 +36,7 @@ navigation = {
             case 2:
                 $("#insert-player-container").empty().append("<div class='insert-player'><input type='text' minlength='1' maxlength='10' class='insert-player-name'><div class='remove-player pressable'><i class='fa-solid fa-trash-can fa-lg'></i></div></div>")
 
-                $("#screen1").fadeOut(250, () => $("#screen3").fadeOut(250, () => $("#screen2").fadeIn(250)))
+                $("#screen1").fadeOut(250, () => $("#screen3").fadeOut(250, () => $("#screen2").fadeIn(250, () => $("#insert-player-container .insert-player-name").last().focus())))
                 break;
 
             case 3:
@@ -49,7 +47,6 @@ navigation = {
 
                     scoreboard.clear()
                     scoreboard.data.players = players
-                    // $("#table tr td.data").first().addClass("selected")
                 }
                 
                 if (LANG === "it")
@@ -60,9 +57,9 @@ navigation = {
                 scoreboard.save()
                 scoreboard.reload()
 
-                // $("#table tr td:empty").first().addClass("selected")
+                $("#table tr td:empty").first().click()
 
-                $("#screen1").fadeOut(250, () => $("#screen2").fadeOut(250, () => $("#screen3").fadeIn(250)))
+                $("#screen1").fadeOut(250, () => $("#screen2").fadeOut(250, () => $("#screen3").fadeIn(250, () => $("#addscore-container #addscore").focus())))
                 break;
 
             default:
@@ -211,7 +208,7 @@ $("#screen0, #restart-no").click((e) => {
 })
 
 $("#table tbody").on("click", ".data", function() {
-console.log('click')
+
     let position = $(this).data().position
     let prevPosition = (parseInt(position.split(",")[0]) - 1) + "," + position.split(",")[1]
     
@@ -226,7 +223,7 @@ console.log('click')
 
 })
 
-$("button[name='signs']").on("click", function(e) {
+$("#screen3 .signsbtn").on("click", function() {
 
     if ($(this).hasClass("checked"))
         $(this).removeClass("checked")
@@ -244,14 +241,14 @@ $("#addscore").on("keydown", function (e) {
         let val = parseInt($(this).val()) || 0
         let x = scoreboard.selected.position.split(",")[0]
         let y = scoreboard.selected.position.split(",")[1]
+        let sign = $(".checked").length ? $(".checked").data().sign : ""
 
-        if ($(".checked").val() === "+") {
+        if (sign === "+")
             scoreboard.data.scores[x][y] = scoreboard.selected.prevValue + val
-        } else if ($(".checked").val() === "-") {
+        else if (sign === "-")
             scoreboard.data.scores[x][y] = scoreboard.selected.prevValue - val
-        } else {
+        else
             scoreboard.data.scores[x][y] = val
-        }
 
         $("#addscore").val("")
 

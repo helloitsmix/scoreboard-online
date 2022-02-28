@@ -70,6 +70,7 @@ input[type=number] {
 }
 
 #screen0 .restart-alert {
+    background-color: #FFFFFF;
     border: 2px solid #AAAAAA;
     border-radius: 0.5rem;
     display: flex;
@@ -209,20 +210,21 @@ input[type=number] {
     border-radius: 0.5rem;
 }
 
-#screen3 #minus {
+#screen3 .signsbtn:first-child {
     margin: 0 0.8rem;
 }
 
 #screen3 #addscore {
     flex: 1;
+    min-width: 0;
     
     border: 3px solid #AAAAAA;
     border-radius: 0.5rem;
 
     font-size: 1.5rem;
     font-weight: 500;
-    padding-right: 1rem;
-    text-align: right;
+    padding: 0 0.8rem;
+    text-align: left;
 }
 
 #screen3 .checked, #screen3 .selected {
@@ -243,6 +245,10 @@ input[type=number] {
 
 #screen3 #table th {
     padding: 0.5rem 0.2rem;
+}
+
+#screen3 #table th:first-child {
+    width: 40px;
 }
 
 #screen3 #table td {
