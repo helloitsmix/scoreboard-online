@@ -20,6 +20,7 @@ navigation = {
     reload: function () {
 
         switch(this.currentPage) {
+
             case 1:
                 let data = scoreboard.load()
                 if (data !== null) {
@@ -83,7 +84,6 @@ scoreboard = {
     selected: {
         position: "",
         // value: 0,
-
         // prevPosition: "",
         prevValue: 0
     },
@@ -164,6 +164,7 @@ scoreboard = {
 }
 
 $(".navigate").click((e) => {
+    
     let choice = $(e.currentTarget).data().navigate.split(",")[0]
     let pages = parseInt($(e.currentTarget).data().navigate.split(",")[1])
     
@@ -171,10 +172,11 @@ $(".navigate").click((e) => {
         navigation.next(pages)
     else
         navigation.back(pages)
+
 })
 
 $("#insert-player-container").on("keydown", ".insert-player-name", (e) => {
-    
+
     if (e.keyCode === 13 || e.keyCode === 9) {
         $("#insert-player-container").append("<div class='insert-player'><input type='text' minlength='1' maxlength='10' class='insert-player-name'><div class='remove-player pressable'><i class='fa-solid fa-trash-can fa-lg'></i></div></div>")
         setTimeout( function() {
@@ -185,26 +187,34 @@ $("#insert-player-container").on("keydown", ".insert-player-name", (e) => {
 })
 
 $("#insert-player-container").on("click", ".remove-player", (e) => {
+
     if ($(".remove-player").length > 1)
         $(e.currentTarget).parent().remove()
+
 })
 
 $("#restart").click((e) => {
     e.stopPropagation()
+
     $("#screen0").fadeIn(250)
+
 })
 
 $("#restart-yes").click((e) => {
     e.stopPropagation()
+
     scoreboard.clear()
     scoreboard.save()
     scoreboard.reload()
     $("#screen0").fadeOut(250)
+
 })
 
 $("#screen0, #restart-no").click((e) => {
     e.stopPropagation()
+
     $("#screen0").fadeOut(250)
+
 })
 
 $("#table tbody").on("click", ".data", function() {

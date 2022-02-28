@@ -30,6 +30,10 @@ input[type=number] {
     flex-direction: column;
 }
 
+.screen input {
+    min-width: 0;
+}
+
 .screen * {
     color: #313131;
 }
@@ -122,7 +126,7 @@ input[type=number] {
     margin: 0 4px 2px 4px;
     color: #AAAAAA;
     
-    font-size: 0.85rem;
+    font-size: 0.75rem;
     font-weight: 500; /* medium */
 
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
@@ -216,7 +220,6 @@ input[type=number] {
 
 #screen3 #addscore {
     flex: 1;
-    min-width: 0;
     
     border: 3px solid #AAAAAA;
     border-radius: 0.5rem;
