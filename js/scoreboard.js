@@ -48,11 +48,7 @@ navigation = {
                     scoreboard.data.players = players
                 }
                 
-                if (translator.options.detectLanguage === "it")
-                    scoreboard.data.lastDate = moment().format("DD/MM/YYYY")
-                else
-                    scoreboard.data.lastDate = moment().format("MM/DD/YYYY")
-
+                scoreboard.data.lastDate = moment().format("DD/MM/YYYY")
                 scoreboard.save()
                 scoreboard.reload()
 
