@@ -1,118 +1,89 @@
-"use strict"
-
-class Translator {
-    
-    constructor(options = {}) {
-        this._options = Object.assign({}, this.defaultConfig, options);
-        this._elements = document.querySelectorAll("[data-i18n]");
-        this._cache = new Map();
-
-        if (this._options.detectLanguage)
-            this._options.defaultLanguage = this._detectLanguage();
-
-        if (this._options.defaultLanguage && typeof this._options.defaultLanguage == "string")
-            this._getResource(this._options.defaultLanguage);
-    }
-
-    _detectLanguage() {
-        return navigator.languages ? navigator.languages[0].substring(0, 2) : navigator.language.substring(0, 2);
-    }
-
-    _fetch(path) {
-        return fetch(path)
-            .then(response => response.json())
-            .catch(() => {console.error(`Could not load ${path}. Please make sure that the file exists.`);});
-    }
-
-    async _getResource(lang) {
-        if (this._cache.has(lang))
-            return JSON.parse(this._cache.get(lang));
-
-        var translation = await this._fetch(
-            `${this._options.filesLocation}/${lang}.json`
-        );
-
-        if (!this._cache.has(lang))
-            this._cache.set(lang, JSON.stringify(translation));
-
-        return translation;
-    }
-
-    async load(lang) {
-        if (!this._options.languages.includes(lang))
-            return;
-
-        this._translate(await this._getResource(lang));
-
-        document.documentElement.lang = lang;
-    }
-
-    _getValueFromJSON(key, json, fallback) {
-        var text = key.split(".").reduce((obj, i) => obj[i], json);
-
-        if (!text && this._options.defaultLanguage && fallback) {
-            let fallbackTranslation = JSON.parse(
-                this._cache.get(this._options.defaultLanguage)
-            );
-
-            text = this._getValueFromJSON(key, fallbackTranslation, false);
-        } else if (!text) {
-            text = key;
-            console.warn(`Could not find text for attribute "${key}".`);
+const i18n = {
+    it: {
+        "screen0": {
+            "message": "Sei sicuro di voler ricominciare?",
+            "alertno": "No",
+            "alertyes": "Si"
+        },
+        "screen1": {
+            "title": "Segnapunti Online",
+            "continue": "CONTINUA",
+            "newgame": "NUOVO GIOCO"
+        },
+        "screen2": {
+            "players": "Giocatori"
         }
-
-        return text;
+    },
+    en: {
+        "screen0": {
+            "message": "Are you sure you want to restart?",
+            "alertno": "No",
+            "alertyes": "Yes"
+        },
+        "screen1": {
+            "title": "Scoreboard Online",
+            "continue": "CONTINUE",
+            "newgame": "NEW GAME"
+        },
+        "screen2": {
+            "players": "Players"
+        }
     }
+}
 
-    _translate(translation) {
+translator = {
+
+    options: {
+        languages: ["it", "en"],
+        defaultLanguage: "en",
+        detectLanguage: ""
+    },
+
+    elements: document.querySelectorAll("[data-i18n]"),
+
+    load: function() {
+
+        const lang = navigator.languages ? navigator.languages[0].substring(0, 2) : navigator.language.substring(0, 2);
+
+        if (this.options.languages.includes(lang)) 
+            this.options.detectLanguage = lang;
+        else
+            this.options.detectLanguage = this.options.defaultLanguage;
+
+        this.translate(i18n[this.options.detectLanguage]);
+
+        document.documentElement.lang = this.options.detectLanguage;
+    },
+
+    translate: function(translation) {
+
         var zip = (keys, values) => keys.map((key, i) => [key, values[i]]);
-        var nullSafeSplit = (str, separator) => (str ? str.split(separator) : null);
-
+        var nullSafeSplit = (str, separator) => str ? str.split(separator) : null;
+        
         var replace = element => {
             var keys = nullSafeSplit(element.getAttribute("data-i18n"), " ") || [];
-            var properties = nullSafeSplit(
-                element.getAttribute("data-i18n-attr"),
-                " "
-            ) || ["innerHTML"];
-
+            var properties = nullSafeSplit(element.getAttribute("data-i18n-attr"), " ") || ["innerHTML"];
+            
             if (keys.length > 0 && keys.length !== properties.length) {
-                console.error(
-                    "data-i18n and data-i18n-attr must contain the same number of items"
-                );
+                console.error("data-i18n and data-i18n-attr must contain the same number of items");
             } else {
                 var pairs = zip(keys, properties);
                 pairs.forEach(pair => {
                     const [key, property] = pair;
-                    var text = this._getValueFromJSON(key, translation, true);
 
-                    if (text) {
+                    var text = key.split(".").reduce((obj, i) => obj[i], translation);
+                    
+                    if (text) 
                         element[property] = text;
-                        element.setAttribute(property, text);
-                    } else {
+                    else
                         console.error(`Could not find text for attribute "${key}".`);
-                    }
                 });
             }
         };
 
-        this._elements.forEach(replace);
+        this.elements.forEach(replace);
     }
 
-    get defaultConfig() {
-        return {
-            languages: ["en"],
-            defaultLanguage: "",
-            detectLanguage: true,
-            filesLocation: "../i18n"
-        };
-    }
 }
 
-var translator = new Translator({
-    languages: ["it", "en"],
-    defaultLanguage: "en",
-    detectLanguage: true,
-    filesLocation: "../i18n"
-});
-
-translator.load(translator._options.defaultLanguage);
+translator.load()

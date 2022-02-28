@@ -1,5 +1,3 @@
-const LANG = navigator.languages ? navigator.languages[0].substring(0, 2) : navigator.language.substring(0, 2)
-
 navigation = {
 
     currentPage: 1,
@@ -24,7 +22,7 @@ navigation = {
             case 1:
                 let data = scoreboard.load()
                 if (data !== null) {
-                    if (LANG === "it")
+                    if (translator.options.detectLanguage === "it")
                         $(".last-game").text("Ultima partita il " + data.lastDate + ": " + data.players.join(", "))
                     else
                         $(".last-game").text("Last game on " + data.lastDate + ": " + data.players.join(", "))
@@ -50,7 +48,7 @@ navigation = {
                     scoreboard.data.players = players
                 }
                 
-                if (LANG === "it")
+                if (translator.options.detectLanguage === "it")
                     scoreboard.data.lastDate = moment().format("DD/MM/YYYY")
                 else
                     scoreboard.data.lastDate = moment().format("MM/DD/YYYY")
@@ -244,7 +242,7 @@ $("#screen3 .signsbtn").on("click", function() {
 
 })
 
-$("#addscore").on("keydown", function (e) {
+$("#addscore").on("keydown", function(e) {
     
     if (e.keyCode === 13 && $(".selected").length) {
 
