@@ -93,6 +93,7 @@ scoreboard = {
     clear: function () {
         this.selected = { position: "", prevValue: 0 }
         this.data.scores = [[]]
+        $("#addscore").val("")
         $("#table thead, #table tbody").empty()
     },
 
@@ -152,6 +153,9 @@ scoreboard = {
         this.reload()
 
         $("td[data-position='" + nextPosition + "']").click()
+
+        if($(".selected").length)
+            $(".selected")[0].scrollIntoView();
              
     }
 
@@ -200,7 +204,9 @@ $("#restart-yes").click((e) => {
     scoreboard.clear()
     scoreboard.save()
     scoreboard.reload()
-    $("#screen0").fadeOut(250)
+
+    $("#table tr td:empty").first().click()
+    $("#screen0").fadeOut(250, () => $("#addscore-container #addscore").focus())
 
 })
 
@@ -258,6 +264,7 @@ $("#addscore").on("keydown", function(e) {
 
         scoreboard.reload(true)
         scoreboard.save()
+
     }
 
 })
