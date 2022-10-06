@@ -5,7 +5,7 @@
     "description": "Simple scoreboard webapp with names, turns and simple operations.",
     "start_url": ".",
     "scope": ".",
-    "display": "fullscreen",
+    "display": "standalone",
     "orientation": "portrait",
     "background_color": "#FFFFFF",
     "theme_color": "#313131",
